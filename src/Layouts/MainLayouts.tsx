@@ -2,40 +2,30 @@ import {Dialog, Menu, Transition} from '@headlessui/react'
 import {Fragment, useState} from 'react'
 import {
     BellIcon,
+    ClipboardIcon,
     CogIcon,
     MenuAlt1Icon,
     QuestionMarkCircleIcon,
-    ScaleIcon,
     ShieldCheckIcon,
-    ClipboardIcon,
     XIcon,
 } from '@heroicons/react/outline'
 
 
+import {ChevronDownIcon,} from '@heroicons/react/solid'
 import {
-    CheckCircleIcon,
-    ChevronDownIcon,
-    OfficeBuildingIcon,
-    SearchIcon,
-} from '@heroicons/react/solid'
-import {
-    HiOutlineDocumentReport, MdShowChart, IoFastFoodOutline,
-    IoPieChartOutline, AiOutlineCloudUpload, GiStethoscope,
+    AiOutlineCloudUpload,
+    GiStethoscope,
+    HiOutlineDocumentReport,
+    IoFastFoodOutline,
+    IoPieChartOutline,
+    MdShowChart,
 } from "react-icons/all";
 
 import {HiOutlineHome} from "react-icons/hi2"
+import {Link, Outlet} from "react-router-dom";
+import {getRouteName, isActiveRoute} from "../hooks/isActiveRoute";
 
 
-const navigation = [
-    {name: 'Statistics', href: '#', icon: HiOutlineHome, current: true},
-    {name: 'Logbook', href: '#', icon: ClipboardIcon, current: false},
-    {name: 'Food', href: '#', icon: IoFastFoodOutline, current: false},
-    {name: 'Timeline', href: '#', icon: MdShowChart, current: false},
-    {name: 'Charts', href: '#', icon: IoPieChartOutline, current: false},
-    {name: 'Reports', href: '#', icon: HiOutlineDocumentReport, current: false},
-    {name: 'Data', href: '#', icon: AiOutlineCloudUpload, current: false},
-    {name: 'Clinician', href: '#', icon: GiStethoscope, current: false},
-]
 const secondaryNavigation = [
     {name: 'Settings', href: '#', icon: CogIcon},
     {name: 'Help', href: '#', icon: QuestionMarkCircleIcon},
@@ -48,7 +38,19 @@ function classNames(...classes: any[]) {
 }
 
 export default function MainLayouts() {
+
+    const navigation = [
+        {name: 'Statistics', href: '/dashboard', icon: HiOutlineHome, current: isActiveRoute("/dashboard")},
+        {name: 'Logbook', href: '/logbook', icon: ClipboardIcon, current: isActiveRoute("/logbook")},
+        {name: 'Food', href: '/food', icon: IoFastFoodOutline, current: isActiveRoute("/food")},
+        {name: 'Timeline', href: '/timeline', icon: MdShowChart, current: isActiveRoute("/timeline")},
+        {name: 'Charts', href: '/charts', icon: IoPieChartOutline, current: isActiveRoute("/charts")},
+        {name: 'Reports', href: '/reports', icon: HiOutlineDocumentReport, current: isActiveRoute("/reports")},
+        {name: 'Data', href: '/data', icon: AiOutlineCloudUpload, current: isActiveRoute("/data")},
+        {name: 'Clinician', href: '/clinician', icon: GiStethoscope, current: isActiveRoute("/clinician")},
+    ]
     const [sidebarOpen, setSidebarOpen] = useState(false)
+
 
     return (
         <>
@@ -109,9 +111,9 @@ export default function MainLayouts() {
                                 >
                                     <div className="px-2 space-y-1">
                                         {navigation.map((item) => (
-                                            <a
+                                            <Link
                                                 key={item.name}
-                                                href={item.href}
+                                                to={item.href}
                                                 className={classNames(
                                                     item.current ? 'bg-cyan-800 text-white' : 'text-cyan-100 hover:text-white hover:bg-cyan-600',
                                                     'group flex items-center px-2 py-2 text-base font-medium rounded-md'
@@ -121,21 +123,21 @@ export default function MainLayouts() {
                                                 <item.icon className="mr-4 flex-shrink-0 h-6 w-6 text-cyan-200"
                                                            aria-hidden="true"/>
                                                 {item.name}
-                                            </a>
+                                            </Link>
                                         ))}
                                     </div>
                                     <div className="mt-6 pt-6">
                                         <div className="px-2 space-y-1">
                                             {secondaryNavigation.map((item) => (
-                                                <a
+                                                <Link
                                                     key={item.name}
-                                                    href={item.href}
+                                                    to={item.href}
                                                     className="group flex items-center px-2 py-2 text-base font-medium rounded-md text-cyan-100 hover:text-white hover:bg-cyan-600"
                                                 >
                                                     <item.icon className="mr-4 h-6 w-6 text-cyan-200"
                                                                aria-hidden="true"/>
                                                     {item.name}
-                                                </a>
+                                                </Link>
                                             ))}
                                         </div>
                                     </div>
@@ -163,9 +165,9 @@ export default function MainLayouts() {
                              aria-label="Sidebar">
                             <div className="px-2 space-y-1">
                                 {navigation.map((item) => (
-                                    <a
+                                    <Link
                                         key={item.name}
-                                        href={item.href}
+                                        to={item.href}
                                         className={classNames(
                                             item.current ? 'bg-cyan-800 text-white' : 'text-cyan-100 hover:text-white hover:bg-cyan-600',
                                             'group flex items-center px-2 py-2 text-sm leading-6 font-medium rounded-md'
@@ -175,20 +177,20 @@ export default function MainLayouts() {
                                         <item.icon className="mr-4 flex-shrink-0 h-6 w-6 text-cyan-200"
                                                    aria-hidden="true"/>
                                         {item.name}
-                                    </a>
+                                    </Link>
                                 ))}
                             </div>
                             <div className="mt-6 pt-6">
                                 <div className="px-2 space-y-1">
                                     {secondaryNavigation.map((item) => (
-                                        <a
+                                        <Link
                                             key={item.name}
-                                            href={item.href}
+                                            to={item.href}
                                             className="group flex items-center px-2 py-2 text-sm leading-6 font-medium rounded-md text-cyan-100 hover:text-white hover:bg-cyan-600"
                                         >
                                             <item.icon className="mr-4 h-6 w-6 text-cyan-200" aria-hidden="true"/>
                                             {item.name}
-                                        </a>
+                                        </Link>
                                     ))}
                                 </div>
                             </div>
@@ -208,26 +210,12 @@ export default function MainLayouts() {
                             <MenuAlt1Icon className="h-6 w-6" aria-hidden="true"/>
                         </button>
                         {/* Search bar */}
-                        <div className="flex-1 px-4 flex justify-between sm:px-6 lg:mx-auto lg:px-8">
-                            <div className="flex-1 flex">
-                                <form className="w-full flex md:ml-0" action="#" method="GET">
-                                    <label htmlFor="search-field" className="sr-only">
-                                        Search
-                                    </label>
-                                    <div className="relative w-full text-gray-400 focus-within:text-gray-600">
-                                        <div className="absolute inset-y-0 left-0 flex items-center pointer-events-none"
-                                             aria-hidden="true">
-                                            <SearchIcon className="h-5 w-5" aria-hidden="true"/>
-                                        </div>
-                                        <input
-                                            id="search-field"
-                                            name="search-field"
-                                            className="block w-full h-full pl-8 pr-3 py-2 border-transparent text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-0 focus:border-transparent sm:text-sm"
-                                            placeholder="Search transactions"
-                                            type="search"
-                                        />
-                                    </div>
-                                </form>
+                        <div
+                            className="flex-1 px-4 flex justify-between sm:px-6 lg:mx-auto lg:px-8 border-b-2 border-gray-50 shadow">
+                            <div className="flex-1 flex items-center ">
+                                <h2 className={"ml-3 text-xl font-light leading-7 text-gray-900 sm:leading-9 sm:truncate"}>
+                                    {getRouteName()}
+                                </h2>
                             </div>
                             <div className="ml-4 flex items-center md:ml-6">
                                 <button
@@ -305,59 +293,7 @@ export default function MainLayouts() {
                         </div>
                     </div>
                     <main className="flex-1 pb-8">
-                        {/* Page header */}
-                        <div className="bg-white shadow">
-                            <div className="px-4 sm:px-6 lg:mx-auto lg:px-8">
-                                <div
-                                    className="py-6 md:flex md:items-center md:justify-between lg:border-t lg:border-gray-200">
-                                    <div className="flex-1 min-w-0">
-                                        {/* Profile */}
-                                        <div className="flex items-center">
-                                            <img
-                                                className="hidden h-16 w-16 rounded-full sm:block"
-                                                src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2.6&w=256&h=256&q=80"
-                                                alt=""
-                                            />
-                                            <div>
-                                                <div className="flex items-center">
-                                                    <img
-                                                        className="h-16 w-16 rounded-full sm:hidden"
-                                                        src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2.6&w=256&h=256&q=80"
-                                                        alt=""
-                                                    />
-                                                    <h1 className="ml-3 text-2xl font-bold leading-7 text-gray-900 sm:leading-9 sm:truncate">
-                                                        Good morning, Emilia Birch
-                                                    </h1>
-                                                </div>
-                                                <dl className="mt-6 flex flex-col sm:ml-3 sm:mt-1 sm:flex-row sm:flex-wrap">
-                                                    <dt className="sr-only">Company</dt>
-                                                    <dd className="flex items-center text-sm text-gray-500 font-medium capitalize sm:mr-6">
-                                                        <OfficeBuildingIcon
-                                                            className="flex-shrink-0 mr-1.5 h-5 w-5 text-gray-400"
-                                                            aria-hidden="true"
-                                                        />
-                                                        Duke street studio
-                                                    </dd>
-                                                    <dt className="sr-only">Account status</dt>
-                                                    <dd className="mt-3 flex items-center text-sm text-gray-500 font-medium sm:mr-6 sm:mt-0 capitalize">
-                                                        <CheckCircleIcon
-                                                            className="flex-shrink-0 mr-1.5 h-5 w-5 text-green-400"
-                                                            aria-hidden="true"
-                                                        />
-                                                        Verified account
-                                                    </dd>
-                                                </dl>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div className="mt-8">
-
-
-                        </div>
+                        <Outlet/>
                     </main>
                 </div>
             </div>
