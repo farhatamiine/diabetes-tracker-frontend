@@ -2,11 +2,7 @@ import React from 'react'
 import ReactDOM from 'react-dom/client'
 import './index.css'
 
-import {
-    createBrowserRouter,
-    RouterProvider,
-
-} from "react-router-dom";
+import {createBrowserRouter, RouterProvider,} from "react-router-dom";
 
 import Login from "./Screens/Login";
 import ErrorPage from "./Screens/error-page";
@@ -20,6 +16,8 @@ import Charts from "./Screens/Charts";
 import Reports from "./Screens/Reports";
 import Data from "./Screens/Data";
 import Clinician from "./Screens/Clinician";
+import {Provider} from "react-redux"
+import {store} from "./redux/store";
 
 const router = createBrowserRouter([
     {
@@ -83,6 +81,8 @@ const router = createBrowserRouter([
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
     <React.StrictMode>
-        <RouterProvider router={router}/>
+        <Provider store={store}>
+            <RouterProvider router={router}/>
+        </Provider>
     </React.StrictMode>
 )

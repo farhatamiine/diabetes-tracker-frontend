@@ -1,5 +1,6 @@
 import React from 'react';
 import {CheckCircleIcon, OfficeBuildingIcon} from "@heroicons/react/solid";
+import GlucoseOverview from "../Components/GlucoseOverview";
 
 function Dashboard() {
     return (
@@ -51,7 +52,8 @@ function Dashboard() {
                     </div>
                 </div>
             </div>
-            <div className="mt-8">
+            <div className="mt-8 max-w-full px-10">
+                <GlucoseOverview />
             </div>
         </>
     );
