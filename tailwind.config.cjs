@@ -8,11 +8,12 @@ module.exports = {
     theme: {
         extend: {
             colors: {
-              cyan: colors.cyan
+                cyan: colors.cyan
             }
         },
     },
     plugins: [
-      require('@tailwindcss/forms'),
+        require('@tailwindcss/forms'),
+        require('@tailwindcss/aspect-ratio'),
     ],
 }

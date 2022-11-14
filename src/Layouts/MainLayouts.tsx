@@ -4,14 +4,13 @@ import {
     BellIcon,
     ClipboardIcon,
     CogIcon,
+    HeartIcon,
     MenuAlt1Icon,
     QuestionMarkCircleIcon,
     ShieldCheckIcon,
-    XIcon,
+    XIcon
 } from '@heroicons/react/outline'
-
-
-import {ChevronDownIcon,} from '@heroicons/react/solid'
+import {ChevronDownIcon, PencilIcon, PlusSmIcon} from '@heroicons/react/solid'
 import {
     AiOutlineCloudUpload,
     GiStethoscope,
@@ -24,6 +23,7 @@ import {
 import {HiOutlineHome} from "react-icons/hi2"
 import {Link, Outlet} from "react-router-dom";
 import {getRouteName, isActiveRoute} from "../hooks/isActiveRoute";
+import ProfilePanel from "../Components/ProfilePanel";
 
 
 const secondaryNavigation = [
@@ -50,10 +50,14 @@ export default function MainLayouts() {
         {name: 'Clinician', href: '/clinician', icon: GiStethoscope, current: isActiveRoute("/clinician")},
     ]
     const [sidebarOpen, setSidebarOpen] = useState(false)
-
+    const [open, setOpen] = useState(false)
+    const showMyProfile = () => {
+        setOpen(!open)
+    }
 
     return (
         <>
+            <ProfilePanel open={open} setOpen={setOpen} />
             <div className="min-h-full">
                 <Transition.Root show={sidebarOpen} as={Fragment}>
                     <Dialog as="div" className="fixed inset-0 flex z-40 lg:hidden" onClose={setSidebarOpen}>
@@ -259,6 +263,7 @@ export default function MainLayouts() {
                                             <Menu.Item>
                                                 {({active}) => (
                                                     <a
+                                                        onClick={showMyProfile}
                                                         href="#"
                                                         className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700')}
                                                     >

@@ -4,14 +4,18 @@ import {Pie} from "@nivo/pie";
 import {lineData, pieData} from "../Data/PieData";
 import {ResponsiveLine} from '@nivo/line'
 import OverviewCardData from "./OverviewCardData";
-import {
-    BiDonateBlood,
-    GiHotMeal,
-    MdBloodtype,
-    MdMedication, MdOutlineBloodtype,
-    MdOutlineMedication, MdOutlineSetMeal, MdOutlineSportsHandball,
-    MdSportsHandball
-} from "react-icons/all";
+// @ts-ignore
+import {ReactComponent as Cardiogram} from '../assets/cardiogram.svg'
+// @ts-ignore
+import {ReactComponent as Run} from '../assets/exercise_running.svg'
+// @ts-ignore
+import {ReactComponent as BloodPressure} from '../assets/blood_pressure_2.svg'
+// @ts-ignore
+import {ReactComponent as HotMeal} from '../assets/hot_meal.svg'
+// @ts-ignore
+import {ReactComponent as Syringe} from '../assets/syringe.svg'
+// @ts-ignore
+import {ReactComponent as Diabetes} from '../assets/diabetes.svg'
 
 
 const CenteredMetric = ({dataWithArc, centerX, centerY}: any) => {
@@ -183,27 +187,40 @@ function GlucoseOverview() {
                 <OverviewCardData event={"Bedtime"}
                                   title={"Latest glucose"}
                                   dateOfEvent={new Date()}
-                                  value={101}
-                                  icon={<MdOutlineBloodtype className={"text-cyan-600"} size={50}/>}
+                                  value={"101"}
+                                  icon={<Diabetes className={"text-cyan-600"} size={50}/>}
                                   units={"mg/dl"}/>
                 <OverviewCardData event={"NovoMix 30"}
                                   title={"Latest medication"}
                                   dateOfEvent={new Date()}
-                                  value={25.0}
-                                  icon={<MdOutlineMedication className={"text-cyan-600"} size={50}/>}
+                                  value={"25.0"}
+                                  icon={<Syringe className={"text-cyan-600"} size={50}/>}
                                   units={"units"}/>
                 <OverviewCardData event={"Swimming"}
                                   title={"Latest activity"}
                                   dateOfEvent={new Date()}
-                                  value={120}
-                                  icon={<MdOutlineSportsHandball className={"text-cyan-600"} size={50}/>}
+                                  value={"120"}
+                                  icon={<Run className={"text-cyan-600"} size={50}/>}
                                   units={"min"}/>
                 <OverviewCardData event={"Medium GI"}
                                   title={"Latest meal"}
                                   dateOfEvent={new Date()}
-                                  value={120}
-                                  icon={<MdOutlineSetMeal className={"text-cyan-600"} size={50}/>}
+                                  value={"120"}
+                                  icon={<HotMeal className={"text-cyan-600"} size={50}/>}
                                   units={"carbs (g)"}/>
+                <OverviewCardData event={"Medium GI"}
+                                  title={"Latest blood pressure"}
+                                  dateOfEvent={new Date()}
+                                  value={"80/30"}
+                                  icon={<BloodPressure className={"text-cyan-600"} size={50}/>}
+                                  units={"mmHg"}/>
+                <OverviewCardData event={""}
+                                  title={"Latest HbA1c"}
+                                  dateOfEvent={new Date()}
+                                  value={"120"}
+                                  icon={<Cardiogram className={"text-cyan-600"}/>}
+                                  units={"%"}/>
+
             </div>
         </div>
     );
