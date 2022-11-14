@@ -76,7 +76,7 @@ function ProfilePanel({setOpen, open}: ProfilePanelType) {
                                                 </div>
                                                 <button
                                                     type="button"
-                                                    className="ml-4 flex h-8 w-8 items-center justify-center rounded-full bg-white text-gray-400 hover:bg-gray-100 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                                                    className="ml-4 flex h-8 w-8 items-center justify-center rounded-full bg-white text-gray-400 hover:bg-gray-100 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-cyan-500"
                                                 >
                                                     <HeartIcon className="h-6 w-6" aria-hidden="true"/>
                                                     <span className="sr-only">Favorite</span>
@@ -115,7 +115,7 @@ function ProfilePanel({setOpen, open}: ProfilePanelType) {
                                                     this image.</p>
                                                 <button
                                                     type="button"
-                                                    className="-mr-2 flex h-8 w-8 items-center justify-center rounded-full bg-white text-gray-400 hover:bg-gray-100 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                                                    className="-mr-2 flex h-8 w-8 items-center justify-center rounded-full bg-white text-gray-400 hover:bg-gray-100 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-cyan-500"
                                                 >
                                                     <PencilIcon className="h-5 w-5" aria-hidden="true"/>
                                                     <span className="sr-only">Add description</span>
@@ -138,7 +138,7 @@ function ProfilePanel({setOpen, open}: ProfilePanelType) {
                                                     </div>
                                                     <button
                                                         type="button"
-                                                        className="ml-6 rounded-md bg-white text-sm font-medium text-indigo-600 hover:text-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+                                                        className="ml-6 rounded-md bg-white text-sm font-medium text-cyan-600 hover:text-cyan-500 focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:ring-offset-2"
                                                     >
                                                         Remove<span className="sr-only"> Aimee Douglas</span>
                                                     </button>
@@ -155,7 +155,7 @@ function ProfilePanel({setOpen, open}: ProfilePanelType) {
                                                     </div>
                                                     <button
                                                         type="button"
-                                                        className="ml-6 rounded-md bg-white text-sm font-medium text-indigo-600 hover:text-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+                                                        className="ml-6 rounded-md bg-white text-sm font-medium text-cyan-600 hover:text-cyan-500 focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:ring-offset-2"
                                                     >
                                                         Remove<span className="sr-only"> Andrea McMillan</span>
                                                     </button>
@@ -163,14 +163,14 @@ function ProfilePanel({setOpen, open}: ProfilePanelType) {
                                                 <li className="flex items-center justify-between py-2">
                                                     <button
                                                         type="button"
-                                                        className="group -ml-1 flex items-center rounded-md bg-white p-1 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                                                        className="group -ml-1 flex items-center rounded-md bg-white p-1 focus:outline-none focus:ring-2 focus:ring-cyan-500"
                                                     >
                             <span
                                 className="flex h-8 w-8 items-center justify-center rounded-full border-2 border-dashed border-gray-300 text-gray-400">
                               <PlusSmIcon className="h-5 w-5" aria-hidden="true"/>
                             </span>
                                                         <span
-                                                            className="ml-4 text-sm font-medium text-indigo-600 group-hover:text-indigo-500">
+                                                            className="ml-4 text-sm font-medium text-cyan-600 group-hover:text-cyan-500">
                               Share
                             </span>
                                                     </button>
@@ -180,13 +180,13 @@ function ProfilePanel({setOpen, open}: ProfilePanelType) {
                                         <div className="flex">
                                             <button
                                                 type="button"
-                                                className="flex-1 rounded-md border border-transparent bg-indigo-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+                                                className="flex-1 rounded-md border border-transparent bg-cyan-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-cyan-700 focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:ring-offset-2"
                                             >
                                                 Download
                                             </button>
                                             <button
                                                 type="button"
-                                                className="ml-3 flex-1 rounded-md border border-gray-300 bg-white py-2 px-4 text-sm font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+                                                className="ml-3 flex-1 rounded-md border border-gray-300 bg-white py-2 px-4 text-sm font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:ring-offset-2"
                                             >
                                                 Delete
                                             </button>
