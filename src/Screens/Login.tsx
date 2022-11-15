@@ -3,6 +3,9 @@ import * as yup from 'yup';
 
 import React from 'react'
 import {useNavigate} from "react-router-dom";
+import {useLoginMutation} from "../redux/features/auth/authApiSlice";
+import {useDispatch} from "react-redux";
+import {setCredentials} from "../redux/features/auth/authSlice";
 
 
 const validationSchema = yup.object({
@@ -22,24 +25,8 @@ type RequestType = {
 function Login() {
 
     let navigate = useNavigate();
-
-
-    async function authenticate(values: RequestType) {
-        const res = await fetch(`http://localhost:8080/api/auth/signIn`, {
-            method: "POST",
-            body: JSON.stringify(values),
-            headers: {
-                "Content-Type": "application/json"
-            }
-        });
-
-        if (res.ok) {
-            const json = await res.json()
-            localStorage.setItem("authenticated", JSON.stringify(json))
-            await navigate("/dashboard")
-        }
-
-    }
+    const [login, {isLoading}] = useLoginMutation()
+    const dispatch = useDispatch();
 
     return (
         <>
@@ -61,7 +48,16 @@ function Login() {
                                         password: '',
                                     }}
                                     onSubmit={
-                                        (values,) => authenticate(values)
+                                        async (values,) => {
+                                            try {
+                                                const userData = await login(values).unwrap()
+                                                dispatch(setCredentials(userData));
+                                                navigate("/dashboard")
+
+                                            } catch (err) {
+                                                console.log(err)
+                                            }
+                                        }
                                     }
                                     validationSchema={validationSchema}>
                                     {({

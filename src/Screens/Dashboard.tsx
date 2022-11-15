@@ -1,8 +1,11 @@
 import React from 'react';
 import {CheckCircleIcon, OfficeBuildingIcon} from "@heroicons/react/solid";
 import GlucoseOverview from "../Components/GlucoseOverview";
+import {useSelector} from "react-redux";
+import {selectUserProfile} from "../redux/features/user/userSlice";
 
 function Dashboard() {
+    const authenticatedUser = useSelector(selectUserProfile)
     return (
         <>
             <div className="bg-white shadow">
@@ -25,7 +28,7 @@ function Dashboard() {
                                             alt=""
                                         />
                                         <h1 className="ml-3 text-2xl font-bold leading-7 text-gray-900 sm:leading-9 sm:truncate">
-                                            Good morning, Emilia Birch
+                                            Good morning, {authenticatedUser?.lastName} {authenticatedUser?.firstName}
                                         </h1>
                                     </div>
                                     <dl className="mt-6 flex flex-col sm:ml-3 sm:mt-1 sm:flex-row sm:flex-wrap">

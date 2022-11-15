@@ -2,6 +2,8 @@ import React, {Dispatch, Fragment, SetStateAction} from 'react';
 import {Dialog, Transition} from "@headlessui/react";
 import {HeartIcon, XIcon} from "@heroicons/react/outline";
 import {PencilIcon, PlusSmIcon} from "@heroicons/react/solid";
+import {useSelector} from "react-redux";
+import {selectUserProfile} from "../redux/features/user/userSlice";
 
 type ProfilePanelType = {
     setOpen: Dispatch<SetStateAction<boolean>>,
@@ -10,6 +12,7 @@ type ProfilePanelType = {
 
 
 function ProfilePanel({setOpen, open}: ProfilePanelType) {
+    const authenticatedUser = useSelector(selectUserProfile)
     return (
         <Transition.Root show={open} as={Fragment}>
             <Dialog as="div" className="fixed inset-0 z-50 overflow-hidden" onClose={setOpen}>
@@ -60,56 +63,45 @@ function ProfilePanel({setOpen, open}: ProfilePanelType) {
                                     <div className="space-y-6 pb-16">
                                         <div>
                                             <div
-                                                className="aspect-w-10 aspect-h-7 block w-full overflow-hidden rounded-lg">
+                                                className="h-40 w-40 mx-auto rounded-full block w-full overflow-hidden rounded-lg ">
                                                 <img
                                                     src="https://images.unsplash.com/photo-1582053433976-25c00369fc93?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=512&q=80"
                                                     alt=""
-                                                    className="object-cover"
+                                                    className="object-cover hover:bg-gray-100"
                                                 />
                                             </div>
-                                            <div className="mt-4 flex items-start justify-between">
+                                            <div className="mt-4 flex items-center justify-center">
                                                 <div>
                                                     <h2 className="text-lg font-medium text-gray-900">
-                                                        <span className="sr-only">Details for </span>IMG_4985.HEIC
+                                                        <span className="sr-only">Username is</span> {authenticatedUser.username.toUpperCase()}
                                                     </h2>
-                                                    <p className="text-sm font-medium text-gray-500">3.9 MB</p>
                                                 </div>
-                                                <button
-                                                    type="button"
-                                                    className="ml-4 flex h-8 w-8 items-center justify-center rounded-full bg-white text-gray-400 hover:bg-gray-100 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-cyan-500"
-                                                >
-                                                    <HeartIcon className="h-6 w-6" aria-hidden="true"/>
-                                                    <span className="sr-only">Favorite</span>
-                                                </button>
+
                                             </div>
                                         </div>
                                         <div>
-                                            <h3 className="font-medium text-gray-900">Information</h3>
+                                            <h3 className="font-medium text-gray-900">User Information</h3>
                                             <dl className="mt-2 divide-y divide-gray-200 border-t border-b border-gray-200">
                                                 <div className="flex justify-between py-3 text-sm font-medium">
-                                                    <dt className="text-gray-500">Uploaded by</dt>
-                                                    <dd className="text-gray-900">Marie Culver</dd>
+                                                    <dt className="text-gray-500">Full Name</dt>
+                                                    <dd className="text-gray-900">{authenticatedUser.firstName} {authenticatedUser.lastName}</dd>
                                                 </div>
                                                 <div className="flex justify-between py-3 text-sm font-medium">
-                                                    <dt className="text-gray-500">Created</dt>
-                                                    <dd className="text-gray-900">June 8, 2020</dd>
+                                                    <dt className="text-gray-500">Email</dt>
+                                                    <dd className="text-gray-900">{authenticatedUser.email}</dd>
                                                 </div>
                                                 <div className="flex justify-between py-3 text-sm font-medium">
-                                                    <dt className="text-gray-500">Last modified</dt>
-                                                    <dd className="text-gray-900">June 8, 2020</dd>
+                                                    <dt className="text-gray-500">Country</dt>
+                                                    <dd className="text-gray-900">{authenticatedUser.country}</dd>
                                                 </div>
                                                 <div className="flex justify-between py-3 text-sm font-medium">
-                                                    <dt className="text-gray-500">Dimensions</dt>
-                                                    <dd className="text-gray-900">4032 x 3024</dd>
-                                                </div>
-                                                <div className="flex justify-between py-3 text-sm font-medium">
-                                                    <dt className="text-gray-500">Resolution</dt>
-                                                    <dd className="text-gray-900">72 x 72</dd>
+                                                    <dt className="text-gray-500">Date of birth</dt>
+                                                    <dd className="text-gray-900">{authenticatedUser.yearsOfBirth}</dd>
                                                 </div>
                                             </dl>
                                         </div>
                                         <div>
-                                            <h3 className="font-medium text-gray-900">Description</h3>
+                                            <h3 className="font-medium text-gray-900">About me</h3>
                                             <div className="mt-2 flex items-center justify-between">
                                                 <p className="text-sm italic text-gray-500">Add a description to
                                                     this image.</p>
@@ -121,75 +113,6 @@ function ProfilePanel({setOpen, open}: ProfilePanelType) {
                                                     <span className="sr-only">Add description</span>
                                                 </button>
                                             </div>
-                                        </div>
-                                        <div>
-                                            <h3 className="font-medium text-gray-900">Shared with</h3>
-                                            <ul role="list"
-                                                className="mt-2 divide-y divide-gray-200 border-t border-b border-gray-200">
-                                                <li className="flex items-center justify-between py-3">
-                                                    <div className="flex items-center">
-                                                        <img
-                                                            src="https://images.unsplash.com/photo-1502685104226-ee32379fefbe?ixlib=rb-=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=3&w=1024&h=1024&q=80"
-                                                            alt=""
-                                                            className="h-8 w-8 rounded-full"
-                                                        />
-                                                        <p className="ml-4 text-sm font-medium text-gray-900">Aimee
-                                                            Douglas</p>
-                                                    </div>
-                                                    <button
-                                                        type="button"
-                                                        className="ml-6 rounded-md bg-white text-sm font-medium text-cyan-600 hover:text-cyan-500 focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:ring-offset-2"
-                                                    >
-                                                        Remove<span className="sr-only"> Aimee Douglas</span>
-                                                    </button>
-                                                </li>
-                                                <li className="flex items-center justify-between py-3">
-                                                    <div className="flex items-center">
-                                                        <img
-                                                            src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixqx=oilqXxSqey&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-                                                            alt=""
-                                                            className="h-8 w-8 rounded-full"
-                                                        />
-                                                        <p className="ml-4 text-sm font-medium text-gray-900">Andrea
-                                                            McMillan</p>
-                                                    </div>
-                                                    <button
-                                                        type="button"
-                                                        className="ml-6 rounded-md bg-white text-sm font-medium text-cyan-600 hover:text-cyan-500 focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:ring-offset-2"
-                                                    >
-                                                        Remove<span className="sr-only"> Andrea McMillan</span>
-                                                    </button>
-                                                </li>
-                                                <li className="flex items-center justify-between py-2">
-                                                    <button
-                                                        type="button"
-                                                        className="group -ml-1 flex items-center rounded-md bg-white p-1 focus:outline-none focus:ring-2 focus:ring-cyan-500"
-                                                    >
-                            <span
-                                className="flex h-8 w-8 items-center justify-center rounded-full border-2 border-dashed border-gray-300 text-gray-400">
-                              <PlusSmIcon className="h-5 w-5" aria-hidden="true"/>
-                            </span>
-                                                        <span
-                                                            className="ml-4 text-sm font-medium text-cyan-600 group-hover:text-cyan-500">
-                              Share
-                            </span>
-                                                    </button>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                        <div className="flex">
-                                            <button
-                                                type="button"
-                                                className="flex-1 rounded-md border border-transparent bg-cyan-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-cyan-700 focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:ring-offset-2"
-                                            >
-                                                Download
-                                            </button>
-                                            <button
-                                                type="button"
-                                                className="ml-3 flex-1 rounded-md border border-gray-300 bg-white py-2 px-4 text-sm font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:ring-offset-2"
-                                            >
-                                                Delete
-                                            </button>
                                         </div>
                                     </div>
                                 </div>

@@ -17,7 +17,7 @@ import Reports from "./Screens/Reports";
 import Data from "./Screens/Data";
 import Clinician from "./Screens/Clinician";
 import {Provider} from "react-redux"
-import {store} from "./redux/store";
+import {store} from "./app/store";
 
 const router = createBrowserRouter([
     {
