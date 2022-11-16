@@ -20,12 +20,12 @@ import {
 } from "react-icons/all";
 
 import {HiOutlineHome} from "react-icons/hi2"
-import {Link, Outlet} from "react-router-dom";
+import {Link, Navigate, Outlet} from "react-router-dom";
 import {getRouteName, isActiveRoute} from "../hooks/isActiveRoute";
 import ProfilePanel from "../Components/ProfilePanel";
-import {useDispatch} from "react-redux";
+import {useSelector} from "react-redux";
+import {selectUserProfile} from "../redux/features/user/userSlice";
 import {useGetProfileQuery} from "../redux/features/user/userApiSlice";
-import {setProfile} from "../redux/features/user/userSlice";
 
 
 const secondaryNavigation = [
@@ -56,21 +56,10 @@ export default function MainLayouts() {
     const showMyProfile = () => {
         setOpen(!open)
     }
-    const {data, error, isLoading, isError, isSuccess} = useGetProfileQuery()
-    const dispatch = useDispatch();
-    let content;
-    if (isLoading) {
-        content = (
-            <div className="d-flex justify-content-center">
-                <div className="spinner-border">
-                    <span className="visually-hidden">Loading...</span>
-                </div>
-            </div>
-        )
-    } else if (isSuccess) {
-        dispatch(setProfile(data))
-        content = (
-            <>
+    const profile = useSelector(selectUserProfile);
+
+    return (
+        profile ? <>
                 <ProfilePanel open={open} setOpen={setOpen}/>
                 <div className="min-h-full">
                     <Transition.Root show={sidebarOpen} as={Fragment}>
@@ -317,10 +306,7 @@ export default function MainLayouts() {
                         </main>
                     </div>
                 </div>
-            </>
-        );
-    } else if (isError) {
-        content = <div className="alert alert-danger">{error}</div>;
-    }
-    return <>{content}</>
+            </> :
+            <Navigate to={"/login"}/>
+    )
 }

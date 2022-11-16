@@ -7,8 +7,10 @@ export const authApiSlice = apiSlice.injectEndpoints({
                 url: 'auth/signIn',
                 method: 'POST',
                 body: {...credentials}
-            })
+            }),
+            invalidatesTags: ["User"]
         }),
+
     })
 })
 

@@ -6,6 +6,8 @@ import {useNavigate} from "react-router-dom";
 import {useLoginMutation} from "../redux/features/auth/authApiSlice";
 import {useDispatch} from "react-redux";
 import {setCredentials} from "../redux/features/auth/authSlice";
+import {useGetProfileQuery, userApiSlice} from "../redux/features/user/userApiSlice";
+import {setProfile} from "../redux/features/user/userSlice";
 
 
 const validationSchema = yup.object({
@@ -26,7 +28,10 @@ function Login() {
 
     let navigate = useNavigate();
     const [login, {isLoading}] = useLoginMutation()
+
+
     const dispatch = useDispatch();
+    const [trigger, { isLoading:isProfileLoading, isError, data, error } ] = userApiSlice.endpoints.getProfile.useLazyQuery();
 
     return (
         <>
@@ -50,10 +55,13 @@ function Login() {
                                     onSubmit={
                                         async (values,) => {
                                             try {
-                                                const userData = await login(values).unwrap()
-                                                dispatch(setCredentials(userData));
-                                                navigate("/dashboard")
-
+                                                const loginResult = await login(values).unwrap();
+                                                console.log(loginResult)
+                                                dispatch(setCredentials(loginResult))
+                                                trigger(true).unwrap().then(r => {
+                                                    dispatch(setProfile(r.data))
+                                                    navigate("/dashboard")
+                                                });
                                             } catch (err) {
                                                 console.log(err)
                                             }
