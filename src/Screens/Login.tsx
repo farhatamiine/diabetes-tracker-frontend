@@ -1,12 +1,13 @@
 import {Formik} from 'formik';
 import * as yup from 'yup';
 
-import React from 'react'
+import React, {useEffect, useState} from 'react'
 import {useNavigate} from "react-router-dom";
 import {useLoginMutation} from "../redux/features/auth/authApiSlice";
 import {useDispatch} from "react-redux";
 import {setCredentials} from "../redux/features/auth/authSlice";
-import {useGetProfileQuery, userApiSlice} from "../redux/features/user/userApiSlice";
+import {userApiSlice} from "../redux/features/user/userApiSlice";
+import secureLocalStorage from "react-secure-storage";
 import {setProfile} from "../redux/features/user/userSlice";
 
 
@@ -23,15 +24,42 @@ type RequestType = {
     username: String,
     password: String
 }
-
+type LoginResultType = {
+    token:string,
+    username:string
+}
 function Login() {
 
     let navigate = useNavigate();
     const [login, {isLoading}] = useLoginMutation()
-
+    const [token,setToken] = useState();
 
     const dispatch = useDispatch();
-    const [trigger, { isLoading:isProfileLoading, isError, data, error } ] = userApiSlice.endpoints.getProfile.useLazyQuery();
+    const [trigger, {
+        isLoading: isProfileLoading,
+        isError,
+        data,
+        error
+    }] = userApiSlice.endpoints.getProfile.useLazyQuery();
+    useEffect(() => {
+        if(secureLocalStorage.getItem("credentials")){
+            trigger(true).unwrap().then(r => {
+                dispatch(setProfile(r.data))
+                navigate("/dashboard")
+            });
+        }
+
+    })
+
+    const saveCredentialsAndRedirect = (loginResult:LoginResultType) => {
+        dispatch(setCredentials(loginResult))
+        secureLocalStorage.clear();
+        secureLocalStorage.setItem("credentials", loginResult);
+        trigger(true).unwrap().then(r => {
+            dispatch(setProfile(r.data))
+            navigate("/dashboard")
+        });
+    }
 
     return (
         <>
@@ -56,12 +84,7 @@ function Login() {
                                         async (values,) => {
                                             try {
                                                 const loginResult = await login(values).unwrap();
-                                                console.log(loginResult)
-                                                dispatch(setCredentials(loginResult))
-                                                trigger(true).unwrap().then(r => {
-                                                    dispatch(setProfile(r.data))
-                                                    navigate("/dashboard")
-                                                });
+                                                saveCredentialsAndRedirect(loginResult);
                                             } catch (err) {
                                                 console.log(err)
                                             }
@@ -92,6 +115,7 @@ function Login() {
                                                         id="username"
                                                         name="username"
                                                         type="text"
+                                                        autoComplete={"username"}
                                                         required
                                                         className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-cyan-500 focus:border-cyan-500 sm:text-sm"
                                                     />

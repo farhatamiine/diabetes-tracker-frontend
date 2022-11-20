@@ -73,7 +73,7 @@ function ProfilePanel({setOpen, open}: ProfilePanelType) {
                                             <div className="mt-4 flex items-center justify-center">
                                                 <div>
                                                     <h2 className="text-lg font-medium text-gray-900">
-                                                        <span className="sr-only">Username is</span> {authenticatedUser.username.toUpperCase()}
+                                                        <span className="sr-only">Username is</span> {authenticatedUser?.username?.toUpperCase()}
                                                     </h2>
                                                 </div>
 
@@ -84,19 +84,19 @@ function ProfilePanel({setOpen, open}: ProfilePanelType) {
                                             <dl className="mt-2 divide-y divide-gray-200 border-t border-b border-gray-200">
                                                 <div className="flex justify-between py-3 text-sm font-medium">
                                                     <dt className="text-gray-500">Full Name</dt>
-                                                    <dd className="text-gray-900">{authenticatedUser.firstName} {authenticatedUser.lastName}</dd>
+                                                    <dd className="text-gray-900">{authenticatedUser?.firstName} {authenticatedUser?.lastName}</dd>
                                                 </div>
                                                 <div className="flex justify-between py-3 text-sm font-medium">
                                                     <dt className="text-gray-500">Email</dt>
-                                                    <dd className="text-gray-900">{authenticatedUser.email}</dd>
+                                                    <dd className="text-gray-900">{authenticatedUser?.email}</dd>
                                                 </div>
                                                 <div className="flex justify-between py-3 text-sm font-medium">
                                                     <dt className="text-gray-500">Country</dt>
-                                                    <dd className="text-gray-900">{authenticatedUser.country}</dd>
+                                                    <dd className="text-gray-900">{authenticatedUser?.country}</dd>
                                                 </div>
                                                 <div className="flex justify-between py-3 text-sm font-medium">
                                                     <dt className="text-gray-500">Date of birth</dt>
-                                                    <dd className="text-gray-900">{authenticatedUser.yearsOfBirth}</dd>
+                                                    <dd className="text-gray-900">{authenticatedUser?.yearsOfBirth}</dd>
                                                 </div>
                                             </dl>
                                         </div>

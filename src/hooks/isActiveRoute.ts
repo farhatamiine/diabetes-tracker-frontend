@@ -6,5 +6,5 @@ export const isActiveRoute = (route: String) => {
 }
 
 export const getRouteName = () => {
-    return location.pathname[1].toUpperCase() + location.pathname.slice(2);
+    return location.pathname[1]?.toUpperCase() + location.pathname?.slice(2);
 }

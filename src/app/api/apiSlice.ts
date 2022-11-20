@@ -1,13 +1,14 @@
 import {fetchBaseQuery} from "@reduxjs/toolkit/query";
 import {createApi} from '@reduxjs/toolkit/query/react'
+import secureLocalStorage from "react-secure-storage";
 
 
 const baseQuery = fetchBaseQuery({
     baseUrl: "http://localhost:8080/api/",
     prepareHeaders: (headers, {getState}: any) => {
-        const token = getState().auth.token;
-        if (token) {
-            headers.set("authorization", `Bearer ${token}`)
+        const credentials:any = secureLocalStorage.getItem("credentials");
+        if (credentials) {
+            headers.set("authorization", `Bearer ${credentials.token}`)
         }
         return headers;
     }
@@ -17,6 +18,6 @@ const baseQuery = fetchBaseQuery({
 
 export const apiSlice = createApi({
     baseQuery: baseQuery,
-    tagTypes:["User",],
+    tagTypes:["User","Logbook"],
     endpoints: build => ({})
 })
